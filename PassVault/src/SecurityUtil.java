@@ -47,7 +47,8 @@ public class SecurityUtil {
             byte[] decryptedData = cipher.doFinal(encryptedData);
 
             ObjectInputStream objectStream = new ObjectInputStream(new ByteArrayInputStream(decryptedData));
-            HashMap<String, PasswordVault.PasswordEntry> loadedVault = (HashMap<String, PasswordVault.PasswordEntry>) objectStream.readObject();
+            @SuppressWarnings("unchecked")
+			HashMap<String, PasswordVault.PasswordEntry> loadedVault = (HashMap<String, PasswordVault.PasswordEntry>) objectStream.readObject();
             objectStream.close();
 
             vault.clear();
